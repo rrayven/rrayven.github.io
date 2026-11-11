@@ -1,36 +1,78 @@
-# Lenovo Hardware Check
-[![Build and Minify](https://github.com/oxgro/oxgro.github.io/actions/workflows/build.yml/badge.svg)](https://github.com/oxgro/oxgro.github.io/actions/workflows/build.yml)
-[![Deploy to Pages](https://github.com/oxgro/oxgro.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/oxgro/oxgro.github.io/actions/workflows/deploy.yml)
+# React + TypeScript + Vite
 
-A simple tool to help ease the imaging process for new laptops. Provides tools
-for testing the [keyboard](#keyboard), [speakers/microphone](#speakersmicrophone),
-[camera](#camera), and for more easily installing the Lenovo Service Bridge and
-updating [drivers](#drivers).
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-### Keyboard
-Includes every key on standard Lenovo laptops, aside from the <kbd>Fn</kbd>,
-<kbd>Win</kbd>, and <kbd>PrtScr</kbd> keys. <kbd>Fn</kbd> is handled by the
-keyboard itself and cannot be directly tested (technically you can test for
-its side effects, but I opt not to). The <kbd>Win</kbd> and <kbd>PrtScr</kbd>
-keys are fully testable, but they unfocus the website and are generally a
-pain. A key can be overriden as working by double clicking the associated
-key on the visualization.
+Currently, two official plugins are available:
 
-### Speakers/Microphone
-The automatic test plays a tone on the left then right laptop speaker and
-listens for it on both the laptop and headset microphones. The website will
-not try to test your headphone speakers, as they are not loud enough to
-reliably hear on the laptop's microphone. Instead, the user is encouraged
-to test the headset speakers in each USB port by playing a short jingle in
-each ear.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-### Camera
-Simply shows you your camera and gives an option to either confirm that it
-looks good and proper, or to indicate that it does not look good. Make sure
-to uncover the camera.
+## React Compiler
 
-### Drivers
-Offers a button to directly download the Lenovo Service Bridge, then another
-button to go through Lenovo's download website. Saves time by allowing you
-to immediately download the LSB without waiting for Lenovo's website to
-realize that you don't have it.
+The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+
+Note: This will impact Vite dev & build performances.
+You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
+
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
+
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+
+```
+
+You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+
+```
