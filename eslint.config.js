@@ -2,8 +2,10 @@ import js from '@eslint/js';
 import globals from 'globals';
 import css from '@eslint/css';
 import tseslint from 'typescript-eslint';
+import reactX from 'eslint-plugin-react-x';
 import pluginJsonc from 'eslint-plugin-jsonc';
 import html from '@html-eslint/eslint-plugin';
+import reactDom from 'eslint-plugin-react-dom';
 import stylistic from '@stylistic/eslint-plugin';
 import * as jsoncParser from 'jsonc-eslint-parser';
 import reactHooks from 'eslint-plugin-react-hooks';
@@ -50,6 +52,8 @@ export default defineConfig([
         extends: [
             tseslint.configs.recommendedTypeChecked,
             tseslint.configs.stylisticTypeChecked,
+            reactX.configs['recommended-typescript'],
+            reactDom.configs.recommended,
         ],
         languageOptions: {
             parserOptions: {
