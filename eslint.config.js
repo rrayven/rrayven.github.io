@@ -1,6 +1,7 @@
 import js from '@eslint/js';
 import globals from 'globals';
 import css from '@eslint/css';
+import markdown from '@eslint/markdown';
 import tseslint from 'typescript-eslint';
 import reactX from 'eslint-plugin-react-x';
 import pluginJsonc from 'eslint-plugin-jsonc';
@@ -97,6 +98,25 @@ export default defineConfig([
         rules: {
             'html/no-duplicate-class': 'error',
             'html/indent': ['error', 4],
+        },
+    },
+    {
+        files: ['**/*.md'],
+        plugins: {
+            markdown,
+        },
+        extends: ['markdown/recommended'],
+    },
+    {
+        files: ['**/*.{js,jsx,ts,tsx,json,css,html,md}'],
+        plugins: {
+            '@stylistic': stylistic,
+        },
+        rules: {
+            '@stylistic/eol-last': ['error', 'always'],
+            '@stylistic/no-multiple-empty-lines': ['error', { maxEOF: 1, maxBOF: 0 }],
+            '@stylistic/no-trailing-spaces': 'error',
+            '@stylistic/linebreak-style': ['warn', 'unix'],
         },
     },
 ]);
