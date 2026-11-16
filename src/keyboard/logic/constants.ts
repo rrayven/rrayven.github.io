@@ -13,7 +13,7 @@ const HEIGHTS = {
     HALF: 'HALF',
 } as const;
 
-export { WIDTHS as WIDTH, HEIGHTS as HEIGHT };
+export { WIDTHS, HEIGHTS };
 export type Width = typeof WIDTHS[keyof typeof WIDTHS];
 export type Height = typeof HEIGHTS[keyof typeof HEIGHTS];
 
