@@ -2,10 +2,11 @@ import { useEffect, useRef, useState, type JSX } from 'react';
 import type { KeyCode } from './logic/kbConstants';
 import type { KeyboardSpec } from './components/KBBuilder';
 import KBBuilder from './components/KBBuilder';
+import { States, type State } from '../appConstants';
 
 export type Keys = Set<KeyCode>;
 
-export default function Keyboard ({ KBSpec }: KeyboardParams): JSX.Element {
+export default function Keyboard ({ KBSpec, setCompletion }: KeyboardParams): JSX.Element {
     const kbRef = useRef<HTMLDivElement>(null);
     const visible = useRef(false);
 
@@ -21,6 +22,12 @@ export default function Keyboard ({ KBSpec }: KeyboardParams): JSX.Element {
 
             if (pressed) next.add(key);
             else next.delete(key);
+
+            let complete = true;
+            keys.current.forEach(key => { if (!next.has(key)) complete = false; });
+
+            if (complete) setCompletion(States.PASSED);
+            else if (next.size > 0) setCompletion(States.PARTIAL);
 
             return next;
         });
@@ -79,7 +86,7 @@ export default function Keyboard ({ KBSpec }: KeyboardParams): JSX.Element {
             window.removeEventListener('keydown', onKeyDown);
             window.removeEventListener('keyup', onKeyUp);
         };
-    }, []);
+    });
 
     return (
         <KBBuilder ref={kbRef} kbSpec={KBSpec} register={register} pressedKeys={pressed} heldKeys={held} />
@@ -88,6 +95,7 @@ export default function Keyboard ({ KBSpec }: KeyboardParams): JSX.Element {
 
 interface KeyboardParams {
     KBSpec: KeyboardSpec;
+    setCompletion: (state: State) => void;
 }
 
 export type RegisterKey = (key: KeyCode) => void;

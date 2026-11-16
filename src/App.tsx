@@ -26,7 +26,7 @@ export default function App (): JSX.Element {
                 Hello World
             </h1>
             <Header completion={completion} />
-            <Keyboard KBSpec={genSpec()} />
+            <Keyboard setCompletion={setXCompletionFunc(Sections.KEYBOARD)} KBSpec={genSpec()} />
             <Audio />
             <Camera />
             <Drivers setCompletion={setXCompletionFunc(Sections.DRIVERS)} />
