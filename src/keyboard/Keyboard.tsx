@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type JSX } from 'react';
-import type { KeyCode } from './logic/constants';
+import type { KeyCode } from './logic/kbConstants';
 import type { KeyboardSpec } from './components/KBBuilder';
 import KBBuilder from './components/KBBuilder';
 

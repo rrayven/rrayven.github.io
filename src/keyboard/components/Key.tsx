@@ -1,5 +1,5 @@
 import type { JSX } from 'react';
-import type { Width, Height, KeyCode } from '../logic/constants';
+import type { Width, Height, KeyCode } from '../logic/kbConstants';
 import type { RegisterKey, Keys } from '../Keyboard';
 
 export default function Key ({ width, height, code, name, register, pressed, held }: KeyParams): JSX.Element {

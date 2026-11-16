@@ -4,6 +4,7 @@ import Keyboard from './keyboard/Keyboard';
 import Audio from './audio/Audio';
 import Camera from './camera/Camera';
 import Drivers from './drivers/Drivers';
+import genSpec from './keyboard/logic/lenovo-spec';
 
 export default function App (): JSX.Element {
     return (
@@ -12,7 +13,7 @@ export default function App (): JSX.Element {
                 Hello World
             </h1>
             <Header />
-            <Keyboard />
+            <Keyboard KBSpec={genSpec()} />
             <Audio />
             <Camera />
             <Drivers />
