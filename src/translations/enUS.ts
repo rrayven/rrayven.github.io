@@ -1,17 +1,19 @@
 const Translations = {
-    Sections: {
-        AUDIO: {
-            Name: 'Audio',
+    AUDIO: {
+        Name: 'Audio',
+    },
+    CAMERA: {
+        Name: 'Camera',
+    },
+    DRIVERS: {
+        Name: 'Drivers',
+        Buttons: {
+            BRIDGE: 'Download Lenovo Service Bridge',
+            PCSUPPORT: 'Open Lenovo Support',
         },
-        CAMERA: {
-            Name: 'Camera',
-        },
-        DRIVERS: {
-            Name: 'Drivers',
-        },
-        KEYBOARD: {
-            Name: 'Keyboard',
-        },
+    },
+    KEYBOARD: {
+        Name: 'Keyboard',
     },
 } as const;
 

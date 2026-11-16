@@ -5,13 +5,20 @@ import Audio from './audio/Audio';
 import Camera from './camera/Camera';
 import Drivers from './drivers/Drivers';
 import genSpec from './keyboard/logic/lenovo-spec';
-import { STATES, type Completion } from './appConstants';
+import { Sections, States, type Completion, type Section, type State } from './appConstants';
 import Translations from './translations/enUS';
 
 export default function App (): JSX.Element {
     const [completion, setCompletion] = useState(initCompletion);
 
-    console.log(setCompletion);
+    const setXCompletionFunc = (section: Section) => {
+        return (state: State): void => {
+            setCompletion((previous: Completion) => ({
+                ...previous,
+                [section]: { ...previous[section], state: state },
+            }));
+        };
+    };
 
     return (
         <>
@@ -22,14 +29,14 @@ export default function App (): JSX.Element {
             <Keyboard KBSpec={genSpec()} />
             <Audio />
             <Camera />
-            <Drivers />
+            <Drivers setCompletion={setXCompletionFunc(Sections.DRIVERS)} />
         </>
     );
 }
 
 const initCompletion: Completion = {
-    audio: { state: STATES.UNKNOWN, displayName: Translations.Sections.AUDIO.Name },
-    camera: { state: STATES.UNKNOWN, displayName: Translations.Sections.CAMERA.Name },
-    drivers: { state: STATES.UNKNOWN, displayName: Translations.Sections.DRIVERS.Name },
-    keyboard: { state: STATES.UNKNOWN, displayName: Translations.Sections.KEYBOARD.Name },
+    audio: { state: States.UNKNOWN, displayName: Translations.AUDIO.Name },
+    camera: { state: States.UNKNOWN, displayName: Translations.CAMERA.Name },
+    drivers: { state: States.UNKNOWN, displayName: Translations.DRIVERS.Name },
+    keyboard: { state: States.UNKNOWN, displayName: Translations.KEYBOARD.Name },
 };
