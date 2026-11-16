@@ -1,24 +1,49 @@
 import { useState, type JSX } from 'react';
-import type { KeyCode } from './constants';
+import type { KeyCode } from './logic/constants';
 
-export type KeyMap = Map<KeyCode, boolean>;
+export type Keys = Set<KeyCode>;
 
 export default function Keyboard (): JSX.Element {
-    const [keys, setKeys] = useState<KeyMap>(() => new Map());
+    const [keys, setKeys] = useState<Keys>(() => new Set());
+    /* eslint-disable react-x/use-state */
+    const [pressed, setPressedState] = useState<Keys>(() => new Set());
+    const [held, setHeldState] = useState<Keys>(() => new Set());
+    /* eslint-enable react-x/use-state */
 
     const setPressed = (key: KeyCode, pressed = true): void => {
-        setKeys((previous: KeyMap): KeyMap => {
-            const next = new Map(previous);
-            return next.set(key, pressed);
+        setPressedState((previous: Keys): Keys => {
+            const next = new Set(previous);
+
+            if (pressed) next.add(key);
+            else next.delete(key);
+
+            return next;
         });
     };
 
-    const registerKey = (key: KeyCode): void => {
-        setPressed(key, false);
+    const register: RegisterKey = key => {
+        setKeys((previous: Keys): Keys => {
+            const next = new Set(previous);
+            return next.add(key);
+        });
     };
 
+    const setHeld = (key: KeyCode, held = true): void => {
+        setHeldState((previous: Keys): Keys => {
+            const next = new Set(previous);
+
+            if (held) next.add(key);
+            else next.delete(key);
+
+            return next;
+        });
+    };
+
+    console.log(keys, register, pressed, setPressed, held, setHeld);
 
     return (
         <></>
     );
 }
+
+export type RegisterKey = (key: KeyCode) => void;

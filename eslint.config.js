@@ -114,7 +114,7 @@ export default defineConfig([
         },
         rules: {
             '@stylistic/eol-last': ['error', 'always'],
-            '@stylistic/no-multiple-empty-lines': ['error', { maxEOF: 1, maxBOF: 0 }],
+            '@stylistic/no-multiple-empty-lines': ['error', { maxEOF: 0, maxBOF: 0 }],
             '@stylistic/no-trailing-spaces': 'error',
             '@stylistic/linebreak-style': ['warn', 'unix'],
         },
