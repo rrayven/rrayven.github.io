@@ -1,20 +1,19 @@
 export interface Completion {
-    audio: CompletionValue;
-    camera: CompletionValue;
-    drivers: CompletionValue;
-    keyboard: CompletionValue;
+    AUDIO: CompletionValue;
+    CAMERA: CompletionValue;
+    DRIVERS: CompletionValue;
+    KEYBOARD: CompletionValue;
 }
 
 interface CompletionValue {
     state: State;
-    displayName: string;
 }
 
 export const Sections = {
-    AUDIO: 'audio',
-    CAMERA: 'camera',
-    DRIVERS: 'drivers',
-    KEYBOARD: 'keyboard',
+    AUDIO: 'AUDIO',
+    CAMERA: 'CAMERA',
+    DRIVERS: 'DRIVERS',
+    KEYBOARD: 'KEYBOARD',
 } as const;
 
 export const States = {
