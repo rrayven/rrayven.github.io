@@ -4,7 +4,6 @@ import Keyboard from './keyboard/Keyboard';
 import Audio from './audio/Audio';
 import Camera from './camera/Camera';
 import Drivers from './drivers/Drivers';
-import genSpec from './keyboard/logic/lenovo-spec';
 import { Sections, States, type Completion, type Section, type State } from './appConstants';
 
 export default function App (): JSX.Element {
@@ -25,9 +24,9 @@ export default function App (): JSX.Element {
                 Hello World
             </h1>
             <Header completion={completion} />
-            <Keyboard setCompletion={setXCompletionFunc(Sections.KEYBOARD)} KBSpec={genSpec()} />
+            <Keyboard setCompletion={setXCompletionFunc(Sections.KEYBOARD)} />
             <Audio />
-            <Camera />
+            <Camera setCompletion={setXCompletionFunc(Sections.CAMERA)} />
             <Drivers setCompletion={setXCompletionFunc(Sections.DRIVERS)} />
         </>
     );
@@ -39,3 +38,7 @@ const initCompletion: Completion = {
     DRIVERS: { state: States.UNKNOWN },
     KEYBOARD: { state: States.UNKNOWN },
 };
+
+export interface CommonParams {
+    setCompletion: (state: State) => void;
+}

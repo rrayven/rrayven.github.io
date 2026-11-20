@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState, type JSX } from 'react';
 import type { KeyCode } from './logic/kbConstants';
-import type { KeyboardSpec } from './components/KBBuilder';
 import KBBuilder from './components/KBBuilder';
-import { States, type State } from '../appConstants';
+import { States } from '../appConstants';
+import type { CommonParams } from '../App';
+import genSpec from './logic/lenovo-spec';
 
 export type Keys = Set<KeyCode>;
 
-export default function Keyboard ({ KBSpec, setCompletion }: KeyboardParams): JSX.Element {
+export default function Keyboard ({ setCompletion }: CommonParams): JSX.Element {
     const kbRef = useRef<HTMLDivElement>(null);
     const visible = useRef(false);
 
@@ -90,14 +91,9 @@ export default function Keyboard ({ KBSpec, setCompletion }: KeyboardParams): JS
 
     return (
         <div ref={kbRef} className='Keyboard'>
-            <KBBuilder kbSpec={KBSpec} register={register} pressedKeys={pressed} heldKeys={held} />
+            <KBBuilder kbSpec={genSpec()} register={register} pressedKeys={pressed} heldKeys={held} />
         </div>
     );
-}
-
-interface KeyboardParams {
-    KBSpec: KeyboardSpec;
-    setCompletion: (state: State) => void;
 }
 
 export type RegisterKey = (key: KeyCode) => void;

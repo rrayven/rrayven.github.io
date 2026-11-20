@@ -1,8 +1,9 @@
 import { useState, type JSX } from 'react';
 import Translations from '../translations/enUS';
-import { States, type State } from '../appConstants';
+import { States } from '../appConstants';
+import type { CommonParams } from '../App';
 
-export default function Drivers ({ setCompletion }: DriversParams): JSX.Element {
+export default function Drivers ({ setCompletion }: CommonParams): JSX.Element {
     const [clicked, setClicked] = useState({
         bridge: false,
         support: false,
@@ -40,7 +41,3 @@ const Links = {
     SERVICE_BRIDGE: 'https://download.lenovo.com/lsbv5/LSBSetup.exe',
     PCSUPPORT: 'https://pcsupport.lenovo.com/',
 } as const;
-
-interface DriversParams {
-    setCompletion: (state: State) => void;
-}
