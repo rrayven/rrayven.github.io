@@ -1,9 +1,9 @@
-import type { JSX, Ref } from 'react';
+import type { JSX } from 'react';
 import type { KeyRowSpec } from './KeyRow';
 import type { KeyParamCommon } from './Key';
 import KeyRow from './KeyRow';
 
-export default function KBBuilder ({ ref, kbSpec, register, pressedKeys, heldKeys }: KBBuilderParams): JSX.Element {
+export default function KBBuilder ({ kbSpec, register, pressedKeys, heldKeys }: KBBuilderParams): JSX.Element {
     const generated: JSX.Element[] = [];
 
     for (let i = 0; i < kbSpec.length; i++) {
@@ -20,7 +20,7 @@ export default function KBBuilder ({ ref, kbSpec, register, pressedKeys, heldKey
     }
 
     return (
-        <div ref={ref} className='Keyboard'>
+        <div className='Display'>
             {generated}
         </div>
     );
@@ -29,6 +29,5 @@ export default function KBBuilder ({ ref, kbSpec, register, pressedKeys, heldKey
 export type KeyboardSpec = KeyRowSpec[];
 
 type KBBuilderParams = {
-    ref: Ref<HTMLDivElement> | undefined;
     kbSpec: KeyboardSpec;
 } & KeyParamCommon;

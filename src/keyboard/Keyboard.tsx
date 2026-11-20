@@ -89,7 +89,9 @@ export default function Keyboard ({ KBSpec, setCompletion }: KeyboardParams): JS
     });
 
     return (
-        <KBBuilder ref={kbRef} kbSpec={KBSpec} register={register} pressedKeys={pressed} heldKeys={held} />
+        <div ref={kbRef} className='Keyboard'>
+            <KBBuilder kbSpec={KBSpec} register={register} pressedKeys={pressed} heldKeys={held} />
+        </div>
     );
 }
 
