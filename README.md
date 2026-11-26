@@ -32,3 +32,21 @@ Built with React using Vite
 - View:
 
 ![Diagram of Logic](diagram.png)
+
+
+#### Loose DOM structure:
+
+- audio
+    - pop up w/ prompt + ask for mic permissions
+    - allow:
+        - in/out selector
+        - auto test / manual test
+        - chart of results
+        - option to retest
+    - speakers testing at end of next section:
+    - diagram of ports, svg?
+        - shows which port to test, then its state (pass/fail)
+            - pass/fail button at bottom
+        - allows you to click on each to retest
+    - start button over the whole thing w/ stop button and retest button afterwards
+    - speaker selector w/ play jingle button
